@@ -62,7 +62,7 @@
 
     nav a:hover,
     .back-link:hover,
-    .article-columns a:hover {
+    .article-column a:hover {
       color: var(--green);
     }
 
@@ -122,11 +122,11 @@
       gap: 16px;
     }
 
-    h2 {
+    .article-topline h2 {
       margin: 0;
       color: var(--green-dark);
       font-family: var(--heading);
-      font-size: 1.15rem;
+      font-size: 1.3rem;
     }
 
     .back-link {
@@ -136,19 +136,21 @@
       white-space: nowrap;
     }
 
+    /* Two columns on larger screens */
     .article-columns {
       max-width: 900px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 36px;
     }
 
-    .article-column h2 {
+    .article-column h3 {
       margin: 0 0 14px;
       color: var(--green-dark);
-      font-family: var(--heading);
-      font-size: 1rem;
+      font-family: var(--mono);
+      font-size: .9rem;
+      font-weight: 500;
     }
 
     .article-column p,
@@ -163,7 +165,7 @@
     }
 
     .article-column ul {
-      margin: 0;
+      margin: 0 0 18px;
       padding-left: 22px;
     }
 
@@ -185,7 +187,8 @@
       line-height: 1.7;
     }
 
-    @media (max-width: 700px) {
+    /* Only stack the article columns on phone-sized screens */
+    @media (max-width: 600px) {
       header {
         padding: 15px 5%;
       }
@@ -248,7 +251,7 @@
 
     <article class="article-columns">
       <section class="article-column">
-        <h2>Details</h2>
+        <h3>Details</h3>
 
         <p>
           Shortly after publishing the archives, we realized the name YJAP
@@ -270,7 +273,7 @@
       </section>
 
       <section class="article-column">
-        <h2>Other things we updated</h2>
+        <h3>Other things we updated</h3>
 
         <ul>
           <li>
