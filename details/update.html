@@ -141,7 +141,25 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 28px;
     }
+    .article-columns h3 {
+      margin: 22px 0 10px;
+      color: var(--green-dark);
+      font-family: var(--heading);
+      font-size: 1rem;
+    }
 
+.article-columns ul {
+  margin: 0 0 18px;
+  padding-left: 22px;
+  color: var(--muted);
+  font-size: .76rem;
+  line-height: 1.8;
+}
+
+.article-columns li {
+  padding-left: 4px;
+  margin-bottom: 6px;
+}
     .article-columns p {
       margin: 0 0 16px;
       color: var(--muted);
@@ -191,9 +209,9 @@
 
   <main>
     <section class="article-header">
-      <div class="eyebrow">Major Updates · November 2, 2026</div>
       <h1>Changes to YJAP</h1>
       <p class="subtitle">An update about the name and information in the archive.</p>
+      <div class="eyebrow">Major Updates · November 2, 2026</div>
     </section>
 
     <div class="article-image" role="img" aria-label="YFA">YFA</div>
@@ -207,12 +225,12 @@
       <div>
         <p>
           Shortly after publishing the archives, we realized the name YJAP
-          wasn’t quite right. The archive is mainly intended for ninth-grade
-          students, so we decided to make a name change.
+          wasn’t quite right. The archive is mainly intended for ninth graders, 
+          so we decided to change the name.
         </p>
         <p>
-          The archive is now called YFA, which stands for YGW Freshies
-          Archives. The new name better reflects who the site is for and what
+          The archive is now called the YFA, which stands for YGW Freshies
+          Archives. The new name better fits who and what the site is for and what
           it collects.
         </p>
       </div>
@@ -220,13 +238,16 @@
       <div>
         <p>
           We also reviewed the other posts and corrected information that
-          wasn’t accurate. We want the archive to be entertaining while making
-          sure the details are as clear and correct as possible.
+          wasn’t accurate. In recent updats about Peak Portfolio, we discovered
+          issues with misspelled names and inaccurate information.
         </p>
-        <p>
-          Thanks to everyone who shared feedback and helped us improve the
-          archive after it was published.
-        </p>
+
+        <h3>Some other things we updated</h3>
+        <ul>
+          <li>Clickable content for some posts that will bring you to additional pages</li>
+          <li>We are now open-sourced; you can now view the code at https://github.com/developerSussyCat/YJAP</li>
+          <li>If you see an error, or would like to make a correction, go to issues in the top right of the github repository, and create a new issue</li>
+        </ul>
       </div>
 
       <div>
