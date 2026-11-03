@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>the YFA</title>
+  <title>The YFA</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,6 @@
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -52,10 +51,7 @@
       letter-spacing: .04em;
     }
 
-    nav {
-      display: flex;
-      gap: 24px;
-    }
+    nav { display: flex; gap: 24px; }
 
     nav a {
       color: var(--ink);
@@ -77,21 +73,7 @@
       letter-spacing: .12em;
       text-transform: uppercase;
     }
-    .toolbar {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* aligns content to the left */
-}
 
-.search-box {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.search-icon {
-  font-size: 1rem;
-}
     h1 {
       max-width: 800px;
       margin: 19px 0 16px;
@@ -128,9 +110,14 @@
       font-weight: 700;
     }
 
+    .search-wrap {
+      position: relative;
+      width: min(100%, 320px);
+    }
+
     .search {
-      width: min(100%, 270px);
-      padding: 11px 13px;
+      width: 100%;
+      padding: 10px 40px 10px 12px;
       border: 1px solid var(--line);
       border-radius: 9px;
       background: white;
@@ -141,57 +128,27 @@
     }
 
     .search:focus { border-color: var(--green); }
-    .search-wrap {
-  position: relative;
-  width: min(100%, 320px);
-}
 
-.search {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 10px 40px 10px 12px;
-}
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      width: 18px;
+      height: 18px;
+      transform: translateY(-50%);
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      pointer-events: none;
+    }
 
-.search-icon {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  width: 18px;
-  height: 18px;
-  transform: translateY(-50%);
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  pointer-events: none;
-}
-.post-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-}
-
-.post-date {
-  color: #000;
-  font-size: 0.85rem;
-}
-
-.post-date {
-  font-size: 0.8rem;
-  color: #777;
-  line-height: 1.2;
     .grid {
       padding: 12px 7% 76px;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 22px;
-    }
-    .card-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
+      align-items: start;
     }
 
     .card {
@@ -224,17 +181,33 @@
       letter-spacing: -.05em;
     }
 
-    .card:nth-child(3n + 2) .card-image {
-      background: #596b58;
-    }
+    .card:nth-child(3n + 2) .card-image { background: #596b58; }
 
     .card:nth-child(3n) .card-image {
       background: #82927b;
       color: #fcfdf9;
     }
 
-    .card-body {
-      padding: 17px 7px 8px;
+    .card-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-body { padding: 17px 7px 8px; }
+
+    .post-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .post-date {
+      color: #000;
+      font-size: .8rem;
+      line-height: 1.2;
     }
 
     .card h3 {
@@ -319,6 +292,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="brand">9TH Grade Hock ✳</div>
@@ -414,11 +388,6 @@
     const search = document.getElementById("search");
 
     function renderCards(filter = "") {
-      if (!grid || !search) {
-        console.error("Could not find #cardGrid or #search in the HTML.");
-        return;
-      }
-
       const query = filter.trim().toLowerCase();
 
       const matchingPosts = posts.filter(post => {
@@ -487,6 +456,7 @@
         }
 
         const likeButton = card.querySelector(".like-btn");
+
         likeButton.addEventListener("click", () => {
           const liked = likeButton.getAttribute("aria-pressed") === "true";
           likeButton.setAttribute("aria-pressed", String(!liked));
