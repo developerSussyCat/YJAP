@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>School Lore — Propaganda Archive</title>
+  <title>the YFA</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -165,7 +165,23 @@
   stroke-linecap: round;
   pointer-events: none;
 }
+.post-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-bottom: 12px;
+}
 
+.post-tag {
+  display: inline-block;
+  /* Keep your existing tag styles */
+}
+
+.post-date {
+  font-size: 0.8rem;
+  color: #777;
+  line-height: 1.2;
     .grid {
       padding: 12px 7% 76px;
       display: grid;
@@ -343,10 +359,10 @@
   <main class="grid" id="cardGrid"></main>
 
   <footer id="about">
-    The YGW Junior Archives Program, or YJAP, is an archival system for all sorts of currents—from epic voice cracks and exciting updates to fresh stories, 
+    The YGW Junior Archives, or YFA, is an archival system for all sorts of currents—from epic voice cracks and exciting updates to fresh stories, 
     memorable moments, and other noteworthy happenings. Our goal is to collect and share the latest highlights in one place, so there’s always something new to discover. 
     We’ll be adding fresh content every week, so check back regularly to catch up on the newest posts and see what’s happening around YGW! <br/>
-    Thank you to Shlomo Wasserman, Avi Segal, and Moshe Landman for the creation of this archive
+    Thank you to all the amazing people who helped with the creation of this archive
   </footer>
 
   <script>
@@ -367,14 +383,14 @@
       {
         tag: "Student Archives",
         title: "More Articles Coming soon!",
-        description: "The YGW Junior Archives Program, or YJAP, is an archival system for all sorts of currents, including epic voice cracks, new updates, and all sorts of refreshing content! We will be posting new content every week.",
+        description: "The YGW Junior Archives program, or YFA, is an archival system for all sorts of currents, including epic voice cracks, new updates, and all sorts of refreshing content! We will be posting new content every week.",
         imageText: "Student Archives"
       },
       {
     
         tag: "Big Shu propaganda",
         title: "Big Shu. Big Shoe. Big History.",
-        description: "They said history couldn’t get any bigger. Then Big Shu stepped into the shoe.",
+        description: "They said history couldn’t get any bigger. Then Big Shu stepped into the shoe. 'I can't walk 100 miles in these shoes'. No matter where you shop, there's always the Big Shu",
         image: "./Group 15.png",
         imageText: "BIG SHU"
     },
@@ -386,8 +402,9 @@
     //   },
       {
          tag: "PEAK PORTFOLIO",
-         title: "Stocks for Juniors and Sophomores",
-         description: "Jerry Muzins and Barry Moss are starting a stock investment club for 9th and 10th graders. Explore how the stock market works, learn about companies, and practice building a portfolio together. No experience needed. Think big. Learn the market. Build your peak.",
+         date: "November 3, 2026",
+         title: "Stocks for Freshies and Sophomores",
+         description: "Jerry Muzin and Barry Moss are starting up a stock investment club for 9th and 10th graders. Explore how the stock market works, learn about companies, and practice building a portfolio. No experience needed! Think big an learn the market.",
          image: "./Group 16 (1).png",
          imageText: "PEAK PORTFOLIO"
     }
@@ -395,6 +412,20 @@
 
     const grid = document.getElementById("cardGrid");
     const search = document.getElementById("search");
+    const tag = document.createElement("span");
+    tag.className = "post-tag";
+    tag.textContent = post.tag;
+
+const date = document.createElement("time");
+date.className = "post-date";
+date.textContent = post.date;
+date.dateTime = new Date(post.date).toISOString().slice(0, 10);
+
+const meta = document.createElement("div");
+meta.className = "post-meta";
+meta.append(tag, date);
+
+card.append(meta);
 
     function renderCards(filter = "") {
       const matchingPosts = posts.filter(post =>
