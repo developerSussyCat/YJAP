@@ -332,43 +332,42 @@
     <div class="eyebrow">Official student archive</div>
     <h1>Local legends.<br>Questionable facts.</h1>
     <p>
-      A great, completely reliable collection of 9th grade occurences, hallway hock,
+      A great, completely reliable collection of 9th grade occurrences, hallway hock,
       and propaganda that is absolutely necessary.
     </p>
   </section>
 
   <section class="toolbar" id="archive">
-  <h2>Fresh from the rumor mill</h2>
-
-  <div class="search-wrap">
-    <input
-      class="search"
-      id="search"
-      type="search"
-      placeholder="Search the archive…"
-      aria-label="Search posts"
-    >
-    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="10.8" cy="10.8" r="6.8"></circle>
-      <path d="m16 16 5 5"></path>
-    </svg>
-  </div>
-</section>
+    <h2>Fresh from the rumor mill</h2>
+    <div class="search-wrap">
+      <input
+        class="search"
+        id="search"
+        type="search"
+        placeholder="Search the archive…"
+        aria-label="Search posts"
+      >
+      <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="10.8" cy="10.8" r="6.8"></circle>
+        <path d="m16 16 5 5"></path>
+      </svg>
+    </div>
+  </section>
 
   <main class="grid" id="cardGrid"></main>
 
   <footer id="about">
-    The YGW Junior Archives, or YFA, is an archival system for all sorts of currents—from epic voice cracks and exciting updates to fresh stories, 
-    memorable moments, and other noteworthy happenings. Our goal is to collect and share the latest highlights in one place, so there’s always something new to discover. 
-    We’ll be adding fresh content every week, so check back regularly to catch up on the newest posts and see what’s happening around YGW! <br/>
-    Thank you to all the amazing people who helped with the creation of this archive
+    The YGW Junior Archives, or YFA, is an archival system for all sorts of currents—from epic voice cracks and exciting updates to fresh stories,
+    memorable moments, and other noteworthy happenings. Our goal is to collect and share the latest highlights in one place, so there’s always something new to discover.
+    We’ll be adding fresh content every week, so check back regularly to catch up on the newest posts and see what’s happening around YGW!<br>
+    Thank you to all the amazing people who helped with the creation of this archive.
   </footer>
 
   <script>
     const posts = [
       {
         tag: "Major Updates",
-        date: "2026-11-2",
+        date: "2026-11-02",
         title: "Changes to YJAP",
         description: "Shortly after the publishment of the archives, we realized the name-YJAP, is inaccurate. Our intended audience is mainly the ninth grade, so we made a major name change: YFA, or YGW Freshies Archives. We also fixed more inaccurate information with other posts.",
         imageText: "Updates",
@@ -376,131 +375,136 @@
       },
       {
         tag: "CARD RULE UPDATE",
+        date: "2026-11-03",
         title: "Cracks, Colors, and Cards",
         description: "The cards are part of the fun, and everyone knows how they work. After some recent color changes, some students are asking for physical cards so they can card farm during Mrs. Wolfe's class, without getting in trouble for talking. Especially after Rabbi Millikowsky's famous 'ThaAnk you'",
         image: "./Group 17 (1).png",
         imageText: "CARDS & COLORS",
         keywords: ["voice crack", "card", "avi sedorski", "red"]
       },
-         {
-         tag: "PEAK PORTFOLIO",
-         date: "2026-11-1",
-         title: "Stocks for Freshies and Sophomores",
-         description: "Jerry Muzin and Barry Moss are starting up a stock investment club for 9th and 10th graders. Explore how the stock market works, learn about companies, and practice building a portfolio. No experience needed! Think big an learn the market.",
-         image: "./Group 16 (1).png",
-         imageText: "PEAK PORTFOLIO",
-         keywords: ["stocks", "barry", "moss", "muzin", "jerry"]
-    },
+      {
+        tag: "PEAK PORTFOLIO",
+        date: "2026-11-01",
+        title: "Stocks for Freshies and Sophomores",
+        description: "Jerry Muzin and Barry Moss are starting up a stock investment club for 9th and 10th graders. Explore how the stock market works, learn about companies, and practice building a portfolio. No experience needed! Think big an learn the market.",
+        image: "./Group 16 (1).png",
+        imageText: "PEAK PORTFOLIO",
+        keywords: ["stocks", "barry", "moss", "muzin", "jerry"]
+      },
       {
         tag: "Student Archives",
+        date: "2026-10-31",
         title: "More Articles Coming soon!",
         description: "The YGW Junior Archives program, or YFA, is an archival system for all sorts of currents, including epic voice cracks, new updates, and all sorts of refreshing content! We will be posting new content every week.",
         imageText: "Student Archives",
         keywords: ["update", "new upload"]
       },
       {
-    
         tag: "Big Shu propaganda",
+        date: "2026-10-30",
         title: "Big Shu. Big Shoe. Big History.",
         description: "They said history couldn’t get any bigger. Then Big Shu stepped into the shoe. 'I can't walk 100 miles in these shoes'. No matter where you shop, there's always the Big Shu",
         image: "./Group 15.png",
         imageText: "BIG SHU",
-        keywords: ["shua", "konar","bigshu", "shoe", "history", "meme"]
-    },
+        keywords: ["shua", "konar", "bigshu", "shoe", "history", "meme"]
+      }
     ];
 
     const grid = document.getElementById("cardGrid");
-const search = document.getElementById("search");
+    const search = document.getElementById("search");
 
-// Keep your existing `posts` array above this code.
-
-function renderCards(filter = "") {
-  const query = filter.trim().toLowerCase();
-
-  const matchingPosts = posts.filter(post => {
-    const searchableText = [
-      post.title,
-      post.description,
-      post.tag,
-      ...(post.keywords || [])
-    ].join(" ").toLowerCase();
-
-    return searchableText.includes(query);
-  });
-
-  grid.innerHTML = "";
-
-  matchingPosts.forEach(post => {
-    const card = document.createElement("article");
-    card.className = "card";
-
-    card.innerHTML = `
-      <div class="card-image">
-        ${
-          post.image
-            ? `<img src="${post.image}" alt="${post.imageText || post.title}">`
-            : post.imageText || ""
-        }
-      </div>
-
-      <div class="card-body">
-        <div class="post-meta">
-          <div class="tag">${post.tag || ""}</div>
-          <time class="post-date"></time>
-        </div>
-
-        <h3>${post.title || ""}</h3>
-        <p class="description">${post.description || ""}</p>
-
-        <div class="like-row">
-          <button class="like-btn" type="button" aria-pressed="false">
-            <span class="heart">♡</span> Like
-          </button>
-        </div>
-      </div>
-    `;
-
-    const dateElement = card.querySelector(".post-date");
-
-    if (post.date) {
-      const parsedDate = new Date(`${post.date}T00:00:00`);
-
-      if (!Number.isNaN(parsedDate.getTime())) {
-        dateElement.dateTime = post.date;
-        dateElement.textContent = parsedDate.toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric"
-        });
+    function renderCards(filter = "") {
+      if (!grid || !search) {
+        console.error("Could not find #cardGrid or #search in the HTML.");
+        return;
       }
-    } else {
-      dateElement.remove();
+
+      const query = filter.trim().toLowerCase();
+
+      const matchingPosts = posts.filter(post => {
+        const searchableText = [
+          post.title || "",
+          post.description || "",
+          post.tag || "",
+          ...(post.keywords || [])
+        ].join(" ").toLowerCase();
+
+        return searchableText.includes(query);
+      });
+
+      grid.innerHTML = "";
+
+      if (matchingPosts.length === 0) {
+        grid.innerHTML = '<p class="empty-state">No rumors found. Yet.</p>';
+        return;
+      }
+
+      matchingPosts.forEach(post => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        card.innerHTML = `
+          <div class="card-image">
+            ${
+              post.image
+                ? `<img src="${post.image}" alt="${post.imageText || post.title || ""}">`
+                : post.imageText || ""
+            }
+          </div>
+
+          <div class="card-body">
+            <div class="post-meta">
+              <div class="tag">${post.tag || ""}</div>
+              <time class="post-date"></time>
+            </div>
+            <h3>${post.title || ""}</h3>
+            <p class="description">${post.description || ""}</p>
+            <div class="like-row">
+              <button class="like-btn" type="button" aria-pressed="false">
+                <span class="heart">♡</span> Like
+              </button>
+            </div>
+          </div>
+        `;
+
+        const dateElement = card.querySelector(".post-date");
+
+        if (post.date) {
+          const parsedDate = new Date(`${post.date}T00:00:00`);
+
+          if (!Number.isNaN(parsedDate.getTime())) {
+            dateElement.dateTime = post.date;
+            dateElement.textContent = parsedDate.toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric"
+            });
+          } else {
+            dateElement.remove();
+          }
+        } else {
+          dateElement.remove();
+        }
+
+        const likeButton = card.querySelector(".like-btn");
+        likeButton.addEventListener("click", () => {
+          const liked = likeButton.getAttribute("aria-pressed") === "true";
+          likeButton.setAttribute("aria-pressed", String(!liked));
+          likeButton.classList.toggle("liked", !liked);
+          likeButton.innerHTML = liked
+            ? '<span class="heart">♡</span> Like'
+            : '<span class="heart">♥</span> Liked';
+        });
+
+        grid.appendChild(card);
+      });
     }
 
-    const likeButton = card.querySelector(".like-btn");
-
-    likeButton.addEventListener("click", () => {
-      const liked = likeButton.getAttribute("aria-pressed") === "true";
-      likeButton.setAttribute("aria-pressed", String(!liked));
-      likeButton.classList.toggle("liked", !liked);
-      likeButton.innerHTML = liked
-        ? '<span class="heart">♡</span> Like'
-        : '<span class="heart">♥</span> Liked';
+    search.addEventListener("input", event => {
+      renderCards(event.target.value);
     });
 
-    grid.appendChild(card);
-  });
-
-  if (matchingPosts.length === 0) {
-    grid.innerHTML = '<p class="empty-state">No rumors found. Yet.</p>';
-  }
-}
-
-search.addEventListener("input", event => {
-  renderCards(event.target.value);
-});
-
-renderCards();
+    renderCards();
   </script>
 </body>
 </html>
