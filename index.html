@@ -391,6 +391,14 @@
       matchingPosts.forEach(post => {
         const card = document.createElement("article");
         card.className = "card";
+        if (post.link) {
+          card.style.cursor = "pointer";
+          card.addEventListener("click", event => {
+          // Don't navigate when the Like button is clicked.
+          if (event.target.closest(".like-btn")) return;
+            window.location.href = post.link;
+        });
+      }
 
         const imageMarkup = post.image
           ? `<img src="${post.image}" alt="${post.imageText || post.title || ""}">`
