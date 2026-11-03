@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Changes to YJAP — 9TH Grade Hock</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Raleway:wght@400;600;700;800&display=swap" rel="stylesheet">
-
   <style>
     :root {
       --green: #356b50;
@@ -22,9 +18,13 @@
       --heading: "Raleway", sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
@@ -62,12 +62,13 @@
     }
 
     nav a:hover,
-    .back-link:hover {
+    .back-link:hover,
+    .article-columns a:hover {
       color: var(--green);
     }
 
     main {
-      width: min(100% - 14%, 1100px);
+      width: min(86%, 1100px);
       margin: 0 auto;
       padding: 52px 0 76px;
     }
@@ -95,7 +96,7 @@
     }
 
     .subtitle {
-      margin: 0;
+      margin: 0 0 14px;
       color: var(--muted);
       font-size: .78rem;
       line-height: 1.7;
@@ -115,7 +116,8 @@
     }
 
     .article-topline {
-      margin-bottom: 22px;
+      max-width: 760px;
+      margin: 0 auto 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -137,10 +139,11 @@
     }
 
     .article-columns {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 28px;
+      display: block;
+      max-width: 760px;
+      margin: 0 auto;
     }
+
     .article-columns h3 {
       margin: 22px 0 10px;
       color: var(--green-dark);
@@ -148,23 +151,30 @@
       font-size: 1rem;
     }
 
-.article-columns ul {
-  margin: 0 0 18px;
-  padding-left: 22px;
-  color: var(--muted);
-  font-size: .76rem;
-  line-height: 1.8;
-}
-
-.article-columns li {
-  padding-left: 4px;
-  margin-bottom: 6px;
-}
-    .article-columns p {
-      margin: 0 0 16px;
+    .article-columns p,
+    .article-columns ul {
       color: var(--muted);
       font-size: .76rem;
       line-height: 1.8;
+    }
+
+    .article-columns p {
+      margin: 0 0 16px;
+    }
+
+    .article-columns ul {
+      margin: 0 0 18px;
+      padding-left: 22px;
+    }
+
+    .article-columns li {
+      margin-bottom: 6px;
+      padding-left: 4px;
+    }
+
+    .article-columns a {
+      color: var(--green-dark);
+      overflow-wrap: anywhere;
     }
 
     footer {
@@ -176,20 +186,25 @@
     }
 
     @media (max-width: 700px) {
-      header { padding: 15px 5%; }
+      header {
+        padding: 15px 5%;
+      }
+
       main {
         width: 90%;
         padding-top: 38px;
       }
-      .article-columns {
-        grid-template-columns: 1fr;
-        gap: 0;
+
+      .article-image {
+        min-height: 190px;
       }
-      .article-image { min-height: 190px; }
     }
 
     @media (max-width: 420px) {
-      nav { gap: 13px; }
+      nav {
+        gap: 13px;
+      }
+
       .article-topline {
         align-items: flex-start;
         flex-direction: column;
@@ -201,6 +216,7 @@
 <body>
   <header>
     <a class="brand" href="../index.html">9TH Grade Hock ✳</a>
+
     <nav>
       <a href="../index.html#archive">The archive</a>
       <a href="../index.html#about">About</a>
@@ -210,7 +226,9 @@
   <main>
     <section class="article-header">
       <h1>Changes to YJAP</h1>
-      <p class="subtitle">An update about the name and information in the archive.</p>
+      <p class="subtitle">
+        An update about the name and information in the archive.
+      </p>
       <div class="eyebrow">Major Updates · November 2, 2026</div>
     </section>
 
@@ -218,47 +236,56 @@
 
     <div class="article-topline">
       <h2>Update details</h2>
-      <a class="back-link" href="../index.html#archive">← Back to the archive</a>
+      <a class="back-link" href="../index.html#archive">
+        ← Back to the archive
+      </a>
     </div>
 
     <article class="article-columns">
-      <div>
-        <p>
-          Shortly after publishing the archives, we realized the name YJAP
-          wasn’t quite right. The archive is mainly intended for ninth graders, 
-          so we decided to change the name.
-        </p>
-        <p>
-          The archive is now called the YFA, which stands for YGW Freshies
-          Archives. The new name better fits who and what the site is for and what
-          it collects.
-        </p>
-      </div>
+      <p>
+        Shortly after publishing the archives, we realized the name YJAP
+        wasn’t quite right. The archive is mainly intended for ninth graders,
+        so we decided to change the name.
+      </p>
 
-      <div>
-        <p>
-          We also reviewed the other posts and corrected information that
-          wasn’t accurate. In recent updats about Peak Portfolio, we discovered
-          issues with misspelled names and inaccurate information.
-        </p>
+      <p>
+        The archive is now called the YFA, which stands for YGW Freshies
+        Archives. The new name better fits who the site is for and what it
+        collects.
+      </p>
 
-        <h3>Some other things we updated</h3>
-        <ul>
-          <li>Clickable content for some posts that will bring you to additional pages</li>
-          <li>We are now open-sourced; you can now view the code at https://github.com/developerSussyCat/YJAP</li>
-          <li>If you see an error, or would like to make a correction, go to issues in the top right of the github repository, and create a new issue</li>
-        </ul>
-      </div>
+      <p>
+        We also reviewed the other posts and corrected information that
+        wasn’t accurate. In recent updates about Peak Portfolio, we discovered
+        issues with misspelled names and inaccurate information.
+      </p>
 
-      <div>
-        <p>
-          You can return to the archive using the link above. We’ll continue
-          adding new posts and updates as the school year goes on.
-        </p>
-        <p>
-          Check back regularly for the latest highlights from around YGW.
-        </p>
-      </div>
+      <h3>Some other things we updated</h3>
+
+      <ul>
+        <li>
+          Clickable content for some posts that will bring you to additional pages.
+        </li>
+        <li>
+          We are now open-sourced; you can view the code at
+          <a href="https://github.com/developerSussyCat/YJAP">
+            the GitHub repository
+          </a>.
+        </li>
+        <li>
+          If you see an error or would like to make a correction, go to
+          “Issues” in the GitHub repository and create a new issue.
+        </li>
+      </ul>
+
+      <p>
+        You can return to the archive using the link above. We’ll continue
+        adding new posts and updates as the school year goes on.
+      </p>
+
+      <p>
+        Check back regularly for the latest highlights from around YGW.
+      </p>
     </article>
   </main>
 
