@@ -316,20 +316,11 @@
         tag: "Major Updates",
         date: "2026-11-02",
         title: "Changes to YJAP",
-        description: "Shortly after the publishment of the archives, we realized the name-YJAP, is inaccurate. Our intended audience is mainly the ninth grade, so we made a major name change: YFA, or YGW Freshies Archives. We also fixed more inaccurate information with other posts. Click to see full details.",
+        description: "Shortly after the publishment of the archives, we realized the name-YJAP, is inaccurate. Our intended audience is mainly the ninth grade, so we made a major name change: YFA, or YGW Freshies Archives. We also fixed more inaccurate information with other posts.",
         link: "details/update.html",
         imageText: "Updates",
         keywords: ["updates", "YJAP", "YFA", "archives"]
       },
-      // {
-      //   tag: "Mrs. Spaghetti",
-      //   date: "2026-11-03",
-      //   title: "Mrs. Maralette Turned Spaghetti",
-      //   description: "After Mrs. Marolette Became Mrs. Spaghetti for students, it was requested that an image be put up. This however violates our conditions. But one person said'She is the second most autistic person I have ever seen'.",
-      //   image: "./Group 17 (1).png",
-      //   imageText: "CARDS & COLORS",
-      //   keywords: ["voice crack", "card", "avi sedorski", "red"]
-      // },
       {
         tag: "CARD RULE UPDATE",
         date: "2026-10-29",
@@ -343,7 +334,7 @@
         tag: "PEAK PORTFOLIO",
         date: "2026-11-01",
         title: "Stocks for Freshies and Sophomores",
-        description: "Jerry Muzin and Barry Moss are starting up a stock investment club for 9th and 10th graders. Explore how the stock market works, learn about companies, and practice building a portfolio. No experience needed! Think big an learn the market.",
+        description: "Jerry Muzin and Barry Moss are starting up a stock investment club for 9th and 10th graders. Explore how the stock market works, learn about companies, and practice building a portfolio. No experience needed! Think big and learn the market.",
         image: "./Group 16 (1).png",
         imageText: "PEAK PORTFOLIO",
         keywords: ["stocks", "barry", "moss", "muzin", "jerry"]
@@ -368,104 +359,99 @@
     ];
 
     const grid = document.getElementById("cardGrid");
-const search = document.getElementById("search");
+    const search = document.getElementById("search");
 
-function renderCards(filter = "") {
-  const query = filter.trim().toLowerCase();
+    function renderCards(filter = "") {
+      const query = filter.trim().toLowerCase();
 
-  const matchingPosts = posts.filter(post => {
-    const searchableText = [
-      post.title || "",
-      post.description || "",
-      post.tag || "",
-      ...(post.keywords || [])
-    ].join(" ").toLowerCase();
+      const matchingPosts = posts.filter(post => {
+        const searchableText = [
+          post.title || "",
+          post.description || "",
+          post.tag || "",
+          ...(post.keywords || [])
+        ].join(" ").toLowerCase();
 
-    return searchableText.includes(query);
-  });
+        return searchableText.includes(query);
+      });
 
-  grid.innerHTML = "";
+      grid.innerHTML = "";
 
-  if (matchingPosts.length === 0) {
-    grid.innerHTML = '<p class="empty-state">No rumors found. Yet.</p>';
-    return;
-  }
-
-  matchingPosts.forEach(post => {
-    const card = document.createElement("article");
-    card.className = "card";
-
-    card.innerHTML = `
-      <div class="card-image">
-        ${
-          post.image
-            ? `<img src="${post.image}" alt="${post.imageText || post.title || ""}">`
-            : post.imageText || ""
-        }
-      </div>
-
-      <div class="card-body">
-        <div class="post-meta">
-          <div class="tag">${post.tag || ""}</div>
-          <time class="post-date"></time>
-        </div>
-
-        <h3>${post.title || ""}</h3>
-        <p class="description">${post.description || ""}</p>
-
-        ${post.link
-          ? `<a class="details-link" href="${post.link}">See full details</a>`
-          : ""}
-
-        <div class="like-row">
-          <button class="like-btn" type="button" aria-pressed="false">
-            <span class="heart">♡</span> Like
-          </button>
-        </div>
-      </div>
-    `;
-
-    const dateElement = card.querySelector(".post-date");
-
-    if (post.date) {
-      const parsedDate = new Date(`${post.date}T00:00:00`);
-
-      if (!Number.isNaN(parsedDate.getTime())) {
-        dateElement.dateTime = post.date;
-        dateElement.textContent = parsedDate.toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric"
-        });
-      } else {
-        dateElement.remove();
+      if (matchingPosts.length === 0) {
+        grid.innerHTML = '<p class="empty-state">No rumors found. Yet.</p>';
+        return;
       }
-    } else {
-      dateElement.remove();
+
+      matchingPosts.forEach(post => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const imageMarkup = post.image
+          ? `<img src="${post.image}" alt="${post.imageText || post.title || ""}">`
+          : (post.imageText || "");
+
+        const detailsMarkup = post.link
+          ? `<a class="details-link" href="${post.link}">See full details</a>`
+          : "";
+
+        card.innerHTML = `
+          <div class="card-image">${imageMarkup}</div>
+          <div class="card-body">
+            <div class="post-meta">
+              <div class="tag">${post.tag || ""}</div>
+              <time class="post-date"></time>
+            </div>
+            <h3>${post.title || ""}</h3>
+            <p class="description">${post.description || ""}</p>
+            ${detailsMarkup}
+            <div class="like-row">
+              <button class="like-btn" type="button" aria-pressed="false">
+                <span class="heart">♡</span> Like
+              </button>
+            </div>
+          </div>
+        `;
+
+        const dateElement = card.querySelector(".post-date");
+
+        if (post.date) {
+          const parsedDate = new Date(`${post.date}T00:00:00`);
+
+          if (!Number.isNaN(parsedDate.getTime())) {
+            dateElement.dateTime = post.date;
+            dateElement.textContent = parsedDate.toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric"
+            });
+          } else {
+            dateElement.remove();
+          }
+        } else {
+          dateElement.remove();
+        }
+
+        const likeButton = card.querySelector(".like-btn");
+
+        likeButton.addEventListener("click", () => {
+          const liked = likeButton.getAttribute("aria-pressed") === "true";
+
+          likeButton.setAttribute("aria-pressed", String(!liked));
+          likeButton.classList.toggle("liked", !liked);
+          likeButton.innerHTML = liked
+            ? '<span class="heart">♡</span> Like'
+            : '<span class="heart">♥</span> Liked';
+        });
+
+        grid.appendChild(card);
+      });
     }
 
-    const likeButton = card.querySelector(".like-btn");
-
-    likeButton.addEventListener("click", () => {
-      const liked = likeButton.getAttribute("aria-pressed") === "true";
-
-      likeButton.setAttribute("aria-pressed", String(!liked));
-      likeButton.classList.toggle("liked", !liked);
-      likeButton.innerHTML = liked
-        ? '<span class="heart">♡</span> Like'
-        : '<span class="heart">♥</span> Liked';
+    search.addEventListener("input", event => {
+      renderCards(event.target.value);
     });
 
-    grid.appendChild(card);
-  });
-}
-
-search.addEventListener("input", event => {
-  renderCards(event.target.value);
-});
-
-renderCards();
-}
+    renderCards();
   </script>
 </body>
 </html>
