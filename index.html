@@ -367,10 +367,104 @@
       }
     ];
 
-    .card-link {
-  display: block;
-  color: inherit;
-  text-decoration: none;
+    const grid = document.getElementById("cardGrid");
+const search = document.getElementById("search");
+
+function renderCards(filter = "") {
+  const query = filter.trim().toLowerCase();
+
+  const matchingPosts = posts.filter(post => {
+    const searchableText = [
+      post.title || "",
+      post.description || "",
+      post.tag || "",
+      ...(post.keywords || [])
+    ].join(" ").toLowerCase();
+
+    return searchableText.includes(query);
+  });
+
+  grid.innerHTML = "";
+
+  if (matchingPosts.length === 0) {
+    grid.innerHTML = '<p class="empty-state">No rumors found. Yet.</p>';
+    return;
+  }
+
+  matchingPosts.forEach(post => {
+    const card = document.createElement("article");
+    card.className = "card";
+
+    card.innerHTML = `
+      <div class="card-image">
+        ${
+          post.image
+            ? `<img src="${post.image}" alt="${post.imageText || post.title || ""}">`
+            : post.imageText || ""
+        }
+      </div>
+
+      <div class="card-body">
+        <div class="post-meta">
+          <div class="tag">${post.tag || ""}</div>
+          <time class="post-date"></time>
+        </div>
+
+        <h3>${post.title || ""}</h3>
+        <p class="description">${post.description || ""}</p>
+
+        ${post.link
+          ? `<a class="details-link" href="${post.link}">See full details</a>`
+          : ""}
+
+        <div class="like-row">
+          <button class="like-btn" type="button" aria-pressed="false">
+            <span class="heart">♡</span> Like
+          </button>
+        </div>
+      </div>
+    `;
+
+    const dateElement = card.querySelector(".post-date");
+
+    if (post.date) {
+      const parsedDate = new Date(`${post.date}T00:00:00`);
+
+      if (!Number.isNaN(parsedDate.getTime())) {
+        dateElement.dateTime = post.date;
+        dateElement.textContent = parsedDate.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric"
+        });
+      } else {
+        dateElement.remove();
+      }
+    } else {
+      dateElement.remove();
+    }
+
+    const likeButton = card.querySelector(".like-btn");
+
+    likeButton.addEventListener("click", () => {
+      const liked = likeButton.getAttribute("aria-pressed") === "true";
+
+      likeButton.setAttribute("aria-pressed", String(!liked));
+      likeButton.classList.toggle("liked", !liked);
+      likeButton.innerHTML = liked
+        ? '<span class="heart">♡</span> Like'
+        : '<span class="heart">♥</span> Liked';
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+search.addEventListener("input", event => {
+  renderCards(event.target.value);
+});
+
+renderCards();
 }
   </script>
 </body>
