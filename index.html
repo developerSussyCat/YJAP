@@ -170,12 +170,11 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
-  margin-bottom: 12px;
 }
 
-.post-tag {
-  display: inline-block;
-  /* Keep your existing tag styles */
+.post-date {
+  color: #000;
+  font-size: 0.85rem;
 }
 
 .post-date {
@@ -367,24 +366,37 @@
 
   <script>
     const posts = [
-    //   {
-    //     tag: "Hallway mythology",
-    //     title: "The hallway is longer on Mondays",
-    //     description: "An unverified study claims the walk to class gains approximately 40 metres after the weekend.",
-    //     imageText: "MONDAY"
-    //   },
+      {
+        tag: "Major Updates",
+        date: "2026-11-2",
+        title: "Changes to YJAP",
+        description: "Shortly after the publishment of the archives, we realized the name-YJAP, is inaccurate. Our intended audience is mainly the ninth grade, so we made a major name change: YFA, or YGW Freshies Archives. We also fixed more inaccurate information with other posts.",
+        imageText: "Updates",
+        keywords: ["updates", "YJAP", "YFA", "archives"]
+      },
       {
         tag: "CARD RULE UPDATE",
         title: "Cracks, Colors, and Cards",
         description: "The cards are part of the fun, and everyone knows how they work. After some recent color changes, some students are asking for physical cards so they can card farm during Mrs. Wolfe's class, without getting in trouble for talking. Especially after Rabbi Millikowsky's famous 'ThaAnk you'",
         image: "./Group 17 (1).png",
-        imageText: "CARDS & COLORS"
+        imageText: "CARDS & COLORS",
+        keywords: ["voice crack", "card", "avi sedorski", "red"]
       },
+         {
+         tag: "PEAK PORTFOLIO",
+         date: "2026-11-1",
+         title: "Stocks for Freshies and Sophomores",
+         description: "Jerry Muzin and Barry Moss are starting up a stock investment club for 9th and 10th graders. Explore how the stock market works, learn about companies, and practice building a portfolio. No experience needed! Think big an learn the market.",
+         image: "./Group 16 (1).png",
+         imageText: "PEAK PORTFOLIO",
+         keywords: ["stocks", "barry", "moss", "muzin", "jerry"]
+    },
       {
         tag: "Student Archives",
         title: "More Articles Coming soon!",
         description: "The YGW Junior Archives program, or YFA, is an archival system for all sorts of currents, including epic voice cracks, new updates, and all sorts of refreshing content! We will be posting new content every week.",
-        imageText: "Student Archives"
+        imageText: "Student Archives",
+        keywords: ["update", "new upload"]
       },
       {
     
@@ -392,103 +404,101 @@
         title: "Big Shu. Big Shoe. Big History.",
         description: "They said history couldn’t get any bigger. Then Big Shu stepped into the shoe. 'I can't walk 100 miles in these shoes'. No matter where you shop, there's always the Big Shu",
         image: "./Group 15.png",
-        imageText: "BIG SHU"
+        imageText: "BIG SHU",
+        keywords: ["shua", "konar","bigshu", "shoe", "history", "meme"]
     },
-    //   {
-    //     tag: "Field report",
-    //     title: "Stairs have a preferred side",
-    //     description: "Walk on the wrong side and every step suddenly feels like a personal challenge.",
-    //     imageText: "THIS WAY"
-    //   },
-      {
-         tag: "PEAK PORTFOLIO",
-         date: "November 3, 2026",
-         title: "Stocks for Freshies and Sophomores",
-         description: "Jerry Muzin and Barry Moss are starting up a stock investment club for 9th and 10th graders. Explore how the stock market works, learn about companies, and practice building a portfolio. No experience needed! Think big an learn the market.",
-         image: "./Group 16 (1).png",
-         imageText: "PEAK PORTFOLIO"
-    }
     ];
 
-    const grid = document.getElementById("cardGrid");
-    const search = document.getElementById("search");
-    const tag = document.createElement("span");
-    tag.className = "post-tag";
-    tag.textContent = post.tag;
-
-const date = document.createElement("time");
-date.className = "post-date";
-date.textContent = post.date;
-date.dateTime = new Date(post.date).toISOString().slice(0, 10);
-
-const meta = document.createElement("div");
-meta.className = "post-meta";
-meta.append(tag, date);
-
-card.append(meta);
-
     function renderCards(filter = "") {
-      const matchingPosts = posts.filter(post =>
-        `${post.title} ${post.description} ${post.tag}`
-          .toLowerCase()
-          .includes(filter.toLowerCase())
-      );
+  const query = filter.trim().toLowerCase();
 
-      grid.innerHTML = "";
+  const matchingPosts = posts.filter(post => {
+    const searchableText = [
+      post.title,
+      post.description,
+      post.tag,
+      ...(post.keywords || [])
+    ].join(" ").toLowerCase();
 
-      if (matchingPosts.length === 0) {
-        grid.innerHTML = '<p class="empty-state">No rumors found. Yet.</p>';
-        return;
-      }
+    return searchableText.includes(query);
+  });
 
-      matchingPosts.forEach(post => {
-        const card = document.createElement("article");
-        card.className = "card";
+  grid.innerHTML = "";
 
-        card.innerHTML = `
-            <div class="card-image" ${
-                post.image
-                    ? ""
-                : `role="img" aria-label="${post.imageText || ""}"`
-            }>
-            ${
-                post.image
-                ? `<img src="${post.image}" alt="${post.imageText || post.title}">`
-                : post.imageText || ""
-             }
+  if (matchingPosts.length === 0) {
+    grid.innerHTML = '<p class="empty-state">No rumors found. Yet.</p>';
+    return;
+  }
+
+  matchingPosts.forEach(post => {
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const image = post.image
+      ? `<img src="${post.image}" alt="${post.imageText || post.title}">`
+      : post.imageText || "";
+
+    const imageAttributes = post.image
+      ? ""
+      : `role="img" aria-label="${post.imageText || ""}"`;
+
+    card.innerHTML = `
+      <div class="card-image" ${imageAttributes}>
+        ${image}
+      </div>
+
+      <div class="card-body">
+        <div class="post-meta">
+          <div class="tag">${post.tag || ""}</div>
+          <time class="post-date"></time>
         </div>
-        <div class="card-body">
-     <div class="tag">${post.tag}</div>
-    <h3>${post.title}</h3>
-    <p class="description">${post.description}</p>
-    <div class="like-row">
-      <button class="like-btn" type="button" aria-pressed="false">
-        <span class="heart">♡</span> Like
-      </button>
-    </div>
-  </div>
+
+        <h3>${post.title || ""}</h3>
+        <p class="description">${post.description || ""}</p>
+
+        <div class="like-row">
+          <button class="like-btn" type="button" aria-pressed="false">
+            <span class="heart">♡</span> Like
+          </button>
+        </div>
+      </div>
     `;
 
-        const likeButton = card.querySelector(".like-btn");
-
-        likeButton.addEventListener("click", () => {
-          const liked = likeButton.getAttribute("aria-pressed") === "true";
-          likeButton.setAttribute("aria-pressed", String(!liked));
-          likeButton.classList.toggle("liked", !liked);
-          likeButton.innerHTML = !liked
-            ? '<span class="heart">♥</span> Liked'
-            : '<span class="heart">♡</span> Like';
+    const dateElement = card.querySelector(".post-date");
+    if (post.date) {
+      // Set post.date as "2026-11-03" in your posts array.
+      const parsedDate = new Date(`${post.date}T00:00:00`);
+      if (!Number.isNaN(parsedDate.getTime())) {
+        dateElement.dateTime = post.date;
+        dateElement.textContent = parsedDate.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric"
         });
-
-        grid.appendChild(card);
-      });
+      }
+    } else {
+      dateElement.remove();
     }
 
-    search.addEventListener("input", event => {
-      renderCards(event.target.value);
+    const likeButton = card.querySelector(".like-btn");
+    likeButton.addEventListener("click", () => {
+      const liked = likeButton.getAttribute("aria-pressed") === "true";
+      likeButton.setAttribute("aria-pressed", String(!liked));
+      likeButton.classList.toggle("liked", !liked);
+      likeButton.innerHTML = !liked
+        ? '<span class="heart">♥</span> Liked'
+        : '<span class="heart">♡</span> Like';
     });
 
-    renderCards();
+    grid.appendChild(card);
+  });
+}
+
+search.addEventListener("input", event => {
+  renderCards(event.target.value);
+});
+
+renderCards();
   </script>
 </body>
 </html>
