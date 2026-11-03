@@ -409,7 +409,12 @@
     },
     ];
 
-    function renderCards(filter = "") {
+    const grid = document.getElementById("cardGrid");
+const search = document.getElementById("search");
+
+// Keep your existing `posts` array above this code.
+
+function renderCards(filter = "") {
   const query = filter.trim().toLowerCase();
 
   const matchingPosts = posts.filter(post => {
@@ -425,26 +430,17 @@
 
   grid.innerHTML = "";
 
-  if (matchingPosts.length === 0) {
-    grid.innerHTML = '<p class="empty-state">No rumors found. Yet.</p>';
-    return;
-  }
-
   matchingPosts.forEach(post => {
     const card = document.createElement("article");
     card.className = "card";
 
-    const image = post.image
-      ? `<img src="${post.image}" alt="${post.imageText || post.title}">`
-      : post.imageText || "";
-
-    const imageAttributes = post.image
-      ? ""
-      : `role="img" aria-label="${post.imageText || ""}"`;
-
     card.innerHTML = `
-      <div class="card-image" ${imageAttributes}>
-        ${image}
+      <div class="card-image">
+        ${
+          post.image
+            ? `<img src="${post.image}" alt="${post.imageText || post.title}">`
+            : post.imageText || ""
+        }
       </div>
 
       <div class="card-body">
@@ -465,9 +461,10 @@
     `;
 
     const dateElement = card.querySelector(".post-date");
+
     if (post.date) {
-      // Set post.date as "2026-11-03" in your posts array.
       const parsedDate = new Date(`${post.date}T00:00:00`);
+
       if (!Number.isNaN(parsedDate.getTime())) {
         dateElement.dateTime = post.date;
         dateElement.textContent = parsedDate.toLocaleDateString("en-US", {
@@ -481,17 +478,22 @@
     }
 
     const likeButton = card.querySelector(".like-btn");
+
     likeButton.addEventListener("click", () => {
       const liked = likeButton.getAttribute("aria-pressed") === "true";
       likeButton.setAttribute("aria-pressed", String(!liked));
       likeButton.classList.toggle("liked", !liked);
-      likeButton.innerHTML = !liked
-        ? '<span class="heart">♥</span> Liked'
-        : '<span class="heart">♡</span> Like';
+      likeButton.innerHTML = liked
+        ? '<span class="heart">♡</span> Like'
+        : '<span class="heart">♥</span> Liked';
     });
 
     grid.appendChild(card);
   });
+
+  if (matchingPosts.length === 0) {
+    grid.innerHTML = '<p class="empty-state">No rumors found. Yet.</p>';
+  }
 }
 
 search.addEventListener("input", event => {
