@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Changes to YJAP — 9TH Grade Hock</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Raleway:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #356b50;
+      --green-dark: #234c38;
+      --green-soft: #eaf0e9;
+      --ink: #202720;
+      --muted: #69736c;
+      --line: #e1e7df;
+      --paper: #fafbf8;
+      --mono: "DM Mono", "Courier New", monospace;
+      --heading: "Raleway", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--mono);
+    }
+
+    header {
+      min-height: 68px;
+      padding: 16px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      color: var(--green-dark);
+      font-size: .95rem;
+      letter-spacing: .04em;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a {
+      color: var(--ink);
+      font-size: .8rem;
+      text-decoration: none;
+    }
+
+    nav a:hover,
+    .back-link:hover {
+      color: var(--green);
+    }
+
+    main {
+      width: min(100% - 14%, 1100px);
+      margin: 0 auto;
+      padding: 52px 0 76px;
+    }
+
+    .article-header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0 12px;
+      color: var(--ink);
+      font-family: var(--heading);
+      font-size: clamp(2.6rem, 8vw, 5.7rem);
+      line-height: 1.05;
+      letter-spacing: -.055em;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: .78rem;
+      line-height: 1.7;
+    }
+
+    .article-image {
+      min-height: 240px;
+      margin: 28px 0 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 3px;
+      background: #78927e;
+      color: var(--green-dark);
+      font-family: var(--heading);
+      font-size: clamp(4rem, 12vw, 7rem);
+      font-weight: 400;
+    }
+
+    .article-topline {
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--green-dark);
+      font-family: var(--heading);
+      font-size: 1.3rem;
+    }
+
+    .back-link {
+      color: var(--ink);
+      font-size: .78rem;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .article-columns {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .article-columns p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: .76rem;
+      line-height: 1.8;
+    }
+
+    footer {
+      padding: 22px 7%;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .72rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 700px) {
+      header { padding: 15px 5%; }
+      main {
+        width: 90%;
+        padding-top: 38px;
+      }
+      .article-columns {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .article-image { min-height: 190px; }
+    }
+
+    @media (max-width: 420px) {
+      nav { gap: 13px; }
+      .article-topline {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a class="brand" href="../index.html">9TH Grade Hock ✳</a>
+    <nav>
+      <a href="../index.html#archive">The archive</a>
+      <a href="../index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="article-header">
+      <div class="eyebrow">Major Updates · November 2, 2026</div>
+      <h1>Changes to YJAP</h1>
+      <p class="subtitle">An update about the name and information in the archive.</p>
+    </section>
+
+    <div class="article-image" role="img" aria-label="YFA">YFA</div>
+
+    <div class="article-topline">
+      <h2>Update details</h2>
+      <a class="back-link" href="../index.html#archive">← Back to the archive</a>
+    </div>
+
+    <article class="article-columns">
+      <div>
+        <p>
+          Shortly after publishing the archives, we realized the name YJAP
+          wasn’t quite right. The archive is mainly intended for ninth-grade
+          students, so we decided to make a name change.
+        </p>
+        <p>
+          The archive is now called YFA, which stands for YGW Freshies
+          Archives. The new name better reflects who the site is for and what
+          it collects.
+        </p>
+      </div>
+
+      <div>
+        <p>
+          We also reviewed the other posts and corrected information that
+          wasn’t accurate. We want the archive to be entertaining while making
+          sure the details are as clear and correct as possible.
+        </p>
+        <p>
+          Thanks to everyone who shared feedback and helped us improve the
+          archive after it was published.
+        </p>
+      </div>
+
+      <div>
+        <p>
+          You can return to the archive using the link above. We’ll continue
+          adding new posts and updates as the school year goes on.
+        </p>
+        <p>
+          Check back regularly for the latest highlights from around YGW.
+        </p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    The YGW Junior Archives, or YFA, is an archive of noteworthy happenings
+    and memorable moments from around YGW.
+  </footer>
+</body>
+</html>
